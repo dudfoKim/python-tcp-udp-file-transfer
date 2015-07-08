@@ -1,6 +1,6 @@
 import socket
 
-s = socket.socket()
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 buffSize = 4096
 
@@ -13,7 +13,7 @@ s.connect((host, port))
 
 f = open(fileName, "rb")
 
-print "Host: " + host
+print "\nHost: " + host + "\n"
 
 l = f.read(buffSize)
 
@@ -22,10 +22,9 @@ while (l):
   print "Enviados " + str(f.tell()) + " bytes..."
   l = f.read(buffSize)
 
-f.close()
+print "\nEnviado!\n"
 
-print "Enviado!"
 s.shutdown(socket.SHUT_WR)
-print s.recv(buffSize)
 
 s.close()
+f.close()

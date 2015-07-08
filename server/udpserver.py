@@ -1,10 +1,10 @@
-from socket import *
+import socket
 
-s = socket(AF_INET, SOCK_DGRAM)
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-buffSize = 1024
+buffSize = 4096
 
-host = gethostname()
+host = socket.gethostname()
 port = 1011
 
 s.bind((host, port))
@@ -17,9 +17,9 @@ data,addr = s.recvfrom(buffSize)
 try:
   while (data):
     f.write(data)
-    s.settimeout(2)
+    s.settimeout(10)
     data, addr = s.recvfrom(buffSize)
-except timeout:
+except socket.timeout:
   f.close()
   s.close()
   print "Recebido!"

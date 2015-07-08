@@ -1,6 +1,6 @@
 import socket
 
-s = socket.socket()
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 buffSize = 4096
 
@@ -17,7 +17,7 @@ while True:
 
   c, addr = s.accept()
 
-  print "Conectado com: " + str(addr)
+  print "\nConectado com: " + str(addr) + "\n"
 
   l = c.recv(buffSize)
 
@@ -26,8 +26,9 @@ while True:
     print "Recebidos " + str(f.tell()) + " bytes..."
     l = c.recv(buffSize)
 
+  print "\nRecebido!\n"
+
   f.close()
-
-  print "Recebeu!"
-
   c.close()
+
+  break
