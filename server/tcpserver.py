@@ -9,7 +9,7 @@ port = 1010
 
 s.bind((host, port))
 
-f = open("duck_rec.jpg","wb")
+f = open("duck_rec.jpg", "wb")
 
 s.listen(5)
 
