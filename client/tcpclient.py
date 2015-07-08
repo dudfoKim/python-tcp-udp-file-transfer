@@ -11,7 +11,7 @@ fileName = "duck.jpg"
 
 s.connect((host, port))
 
-f = open(fileName,"rb")
+f = open(fileName, "rb")
 
 print "Host: " + host
 
