@@ -1,5 +1,7 @@
 import socket
 
+counter = 0
+
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 buffSize = 4096
@@ -15,12 +17,10 @@ f = open(fileName, "rb")
 
 data = f.read(buffSize)
 
-s.sendto(fileName, addr)
-s.sendto(data, addr)
-
 while (data):
   if (s.sendto(data, addr)):
-    print "Enviando..."
+    counter += 1
+    print "Enviando..." + str(counter)
     data = f.read(buffSize)
 
 print "Enviado!"
