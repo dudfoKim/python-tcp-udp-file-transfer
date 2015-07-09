@@ -5,12 +5,17 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 buffSize = 4096
 
-host = ""
+userinput = ""
 hosts = []
 
-while host != "ok":
+while True:
 	print("Digite um endereço para envio, ou ok para iniciar a transmissão")
-	hosts.append(host)
+	userinput = raw_input()
+
+	if userinput == "ok":
+		break
+
+	hosts.append(userinput)
 
 port = 1026
 
