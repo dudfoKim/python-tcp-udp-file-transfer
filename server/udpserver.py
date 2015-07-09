@@ -10,7 +10,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 buffSize = 4096
 
 host = socket.gethostname()
-port = 1011
+port = 1027
 
 s.bind((host, port))
 
