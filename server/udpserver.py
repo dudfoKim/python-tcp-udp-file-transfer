@@ -7,9 +7,9 @@ buffSize = 4096
 host = socket.gethostname()
 port = 1026
 
-s.bind((host, port))
+s.bind(("", port))
 
-addr = (host, port)
+addr = ("", port)
 
 f = open("labredes_rec.mp4", "wb")
 
