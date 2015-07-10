@@ -11,7 +11,7 @@ counter = 1
 host = socket.gethostname()
 port = 1027
 
-s.bind((host, port))
+s.bind(('', port))
 
 addr = (host, port)
 
@@ -32,6 +32,8 @@ while True:
 
   index = inpt['index']
   data = inpt['data']
+  
+  print (data[0:10])
 
   if index == 0 :
   	s.sendto("ok", addr)

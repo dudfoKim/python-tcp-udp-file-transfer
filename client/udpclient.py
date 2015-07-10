@@ -1,5 +1,6 @@
 import sys
 import socket, json
+from time import sleep
 
 counter = 1
 
@@ -28,15 +29,18 @@ while True:
 
   msg, cliente = sckt.recvfrom(1027)
 
-  print(msg)
   if msg == "ok" :
+	  print(str(counter) + " - OK")
+	  
 	  inpt = json.dumps({'index' : counter, 'data' : data}, encoding="latin1")
-
+	  print (data[0:10])
 	  sckt.sendto(inpt, addr)
 	  counter += 1
 
 	  data = f.read(buffSize)
+	  sleep(2)
   else :
+  	  print(str(counter) + " - Reenviando")
   	  inpt = json.dumps({'index' : counter, 'data' : data}, encoding="latin1")
 
 	  sckt.sendto(inpt, addr)

@@ -7,9 +7,9 @@ buffSize = 4096
 host = socket.gethostname()
 port = 1026
 
-print(port)
+print(host)
 
-s.bind((host, port))
+s.bind(('', port))
 
 s.listen(5)
 
