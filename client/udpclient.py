@@ -24,7 +24,7 @@ while True:
     break
 
   inpt = json.dumps({'index' : counter, 'data' : data}, encoding="latin1")
-  print(inpt)
+  
   sckt.sendto(inpt, addr)
   counter += 1
 

@@ -16,20 +16,22 @@ addr = (host, port)
 
 f = open("duck_rec.jpg", "wb")
 
-tupla, addr = s.recvfrom(buffSize)
-tupla = unicode(tupla, 'latin-1')
-print(tupla)
-oi = json.loads(tupla)
+while True:
 
-print(oi)
+  tupla, addr = s.recvfrom(buffSize)
 
-while (data):
+  tupla = unicode(tupla, 'latin-1')
+
+  inpt = json.loads(tupla)
+
+  index = inpt['index']
+  data = inpt['data']
 
   if data == "done":
     f.close()
     s.close()
     break
+  
+  f.write(data.encode("utf-8"))
 
-  f.write(data)
-
-  data, addr = s.recvfrom(buffSize)
+  print(index)
