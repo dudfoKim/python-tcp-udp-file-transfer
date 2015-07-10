@@ -19,7 +19,7 @@ while True:
 
   print "\nConectado com: " + str(addr) + "\n"
 
-  f = open("duck_rec.jpg", "wb")
+  f = open("labredes_rec.mp4", "wb")
 
   l = c.recv(buffSize)
 
