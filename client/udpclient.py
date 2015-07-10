@@ -18,21 +18,32 @@ f = open(fileName, "rb")
 
 data = f.read(buffSize)
 
+conexao = json.dumps({'index' : 0, 'data' : data}, encoding="latin1")
+sckt.sendto(conexao, addr)
+
 while True:
 
   if not data:
     break
 
-  inpt = json.dumps({'index' : counter, 'data' : data}, encoding="latin1")
-  
-  sckt.sendto(inpt, addr)
-  counter += 1
+  msg, cliente = sckt.recvfrom(1027)
 
-  data = f.read(buffSize)
+  print(msg)
+  if msg == "ok" :
+	  inpt = json.dumps({'index' : counter, 'data' : data}, encoding="latin1")
+
+	  sckt.sendto(inpt, addr)
+	  counter += 1
+
+	  data = f.read(buffSize)
+  else :
+  	  inpt = json.dumps({'index' : counter, 'data' : data}, encoding="latin1")
+
+	  sckt.sendto(inpt, addr)
 
 
-if (sckt.sendto("done", addr)):
-  print "Enviado!"
+if (sckt.sendto("done", addr)) :
+	print "Enviado!"
 
 sckt.close()
 f.close()
