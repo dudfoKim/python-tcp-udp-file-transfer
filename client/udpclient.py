@@ -1,14 +1,11 @@
 import sys
-import socket
-
-# empty string: 37 bytes
-# + 1 byte per character
+import socket, json
 
 counter = 1
 
 sckt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-buffSize = 4096 - 45
+buffSize = 4096
 
 host = socket.gethostname()
 port = 1027
@@ -20,21 +17,18 @@ fileName = "duck.jpg"
 f = open(fileName, "rb")
 
 data = f.read(buffSize)
-data = str(counter).zfill(8) + data
 
 while True:
-
-  data = f.read(buffSize)
 
   if not data:
     break
 
-  data = str(counter).zfill(8) + data
-
-  print "pack:" + data[:10]
-
-  sckt.sendto(data, addr)
+  inpt = json.dumps({'index' : counter, 'data' : data}, encoding="latin1")
+  print(inpt)
+  sckt.sendto(inpt, addr)
   counter += 1
+
+  data = f.read(buffSize)
 
 
 if (sckt.sendto("done", addr)):
