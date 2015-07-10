@@ -12,6 +12,7 @@ buffSize = 4096
 host = socket.gethostname()
 port = 1027
 
+print(host)
 s.bind((host, port))
 
 addr = (host, port)

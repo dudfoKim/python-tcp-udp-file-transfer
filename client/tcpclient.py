@@ -1,12 +1,11 @@
 #coding: utf-8
 import socket
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
 buffSize = 4096
 
 userinput = ""
 hosts = []
+port = 1026
 
 while True:
 	print("Digite um endereço para envio, ou ok para iniciar a transmissão")
@@ -17,11 +16,11 @@ while True:
 
 	hosts.append(userinput)
 
-port = 1026
-
 fileName = "duck.jpg"
 
 for h in hosts:
+	
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	s.connect((h, port))
 
 	f = open(fileName, "rb")

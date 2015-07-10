@@ -7,9 +7,9 @@ buffSize = 4096
 host = socket.gethostname()
 port = 1026
 
-s.bind((host, port))
+print(port)
 
-f = open("duck_rec.jpg", "wb")
+s.bind((host, port))
 
 s.listen(5)
 
@@ -18,6 +18,8 @@ while True:
   c, addr = s.accept()
 
   print "\nConectado com: " + str(addr) + "\n"
+
+  f = open("duck_rec.jpg", "wb")
 
   l = c.recv(buffSize)
 
@@ -31,4 +33,3 @@ while True:
   f.close()
   c.close()
 
-  break
