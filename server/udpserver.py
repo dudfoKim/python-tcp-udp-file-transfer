@@ -1,48 +1,34 @@
-import socket, json
+import socket
 
 # 30 pacotes
 # 120406 bytes
 
+counter = 0
+
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-buffSize = 16000000
-counter = 1
+buffSize = 4096
 
 host = socket.gethostname()
-port = 1027
+port = 1026
 
-s.bind(('', port))
+s.bind((host, port))
 
 addr = (host, port)
 
 f = open("duck_rec.jpg", "wb")
 
-while True:
-  
-  tupla, addr = s.recvfrom(buffSize)
+data, addr = s.recvfrom(buffSize)
 
-  if tupla == "done" :
+while (data):
+
+  f.write(data)
+  counter += 1
+  print "count: " + str(counter)
+
+  if counter == 30: # problem
     f.close()
     s.close()
     break
 
-  tupla = unicode(tupla, 'latin-1')
-
-  inpt = json.loads(tupla)
-
-  index = inpt['index']
-  data = inpt['data']
-  
-  print (data[0:10])
-
-  if index == 0 :
-  	s.sendto("ok", addr)
-  	continue
-
-  if index == counter :
-  	s.sendto("ok", addr)
-  	f.write(data.encode("utf-8"))
-  	counter = counter + 1
-  	print(index)
-  else:
-  	s.sendto(str(counter), addr)
+  data, addr = s.recvfrom(buffSize)
