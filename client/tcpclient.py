@@ -8,35 +8,35 @@ hosts = []
 port = 1026
 
 while True:
-	print("Digite um endereço para envio, ou ok para iniciar a transmissão")
-	userinput = raw_input()
+  print("Type the address to send or 'ok' to begin the transmission:")
+  userinput = raw_input()
 
-	if userinput == "ok":
-		break
+  if userinput == "ok":
+    break
 
-	hosts.append(userinput)
+  hosts.append(userinput)
 
 fileName = "duck.jpg"
 
 for h in hosts:
-	
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.connect((h, port))
 
-	f = open(fileName, "rb")
+  s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  s.connect((h, port))
 
-	print "\nHost: " + h + "\n"
+  f = open(fileName, "rb")
 
-	data = f.read(buffSize)
+  print "\nHost: " + h + "\n"
 
-	while (data):
-	  s.send(data)
-	  print "Enviados " + str(f.tell()) + " bytes..."
-	  data = f.read(buffSize)
+  data = f.read(buffSize)
 
-	print "\nEnviado para " + h + "\n"
+  while (data):
+    s.send(data)
+    print "Sent " + str(f.tell()) + " bytes..."
+    data = f.read(buffSize)
 
-	s.shutdown(socket.SHUT_WR)
+  print "\nSent to " + h + "\n"
 
-	s.close()
-	f.close()
+  s.shutdown(socket.SHUT_WR)
+
+  s.close()
+  f.close()

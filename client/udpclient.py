@@ -11,13 +11,13 @@ port = 1026
 
 addr = (host, port)
 
-fileName = "labredes.mp4"
+fileName = "file.mp4"
 
 f = open(fileName, "rb")
 
 while True:
 
-  print "Enviando dados..."
+  print "Sending data..."
 
   data = f.read(buffSize)
 
@@ -25,10 +25,10 @@ while True:
     break
 
   s.sendto(data, addr)
-  
-    
+
+
 if (s.sendto("done", addr)):
-  print "Enviado!"
+  print "Sent!"
 
 s.close()
 f.close()

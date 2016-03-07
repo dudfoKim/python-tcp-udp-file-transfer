@@ -17,19 +17,18 @@ while True:
 
   c, addr = s.accept()
 
-  print "\nConectado com: " + str(addr) + "\n"
+  print "\nConnected with: " + str(addr) + "\n"
 
-  f = open("labredes_rec.mp4", "wb")
+  f = open("file.mp4", "wb")
 
   l = c.recv(buffSize)
 
   while (l):
     f.write(l)
-    print "Recebidos " + str(f.tell()) + " bytes..."
+    print "Received " + str(f.tell()) + " bytes..."
     l = c.recv(buffSize)
 
-  print "\nRecebido!\n"
+  print "\nFile received!\n"
 
   f.close()
   c.close()
-

@@ -11,19 +11,19 @@ s.bind(("", port))
 
 addr = ("", port)
 
-f = open("labredes_rec.mp4", "wb")
+f = open("file.mp4", "wb")
 
 data, addr = s.recvfrom(buffSize)
 
 while (data):
 
   f.write(data)
-  
-  print "Recebendo dados..."
+
+  print "Receiving data..."
 
   if data == "done":
-	f.close()
-	s.close()
-	break
+    f.close()
+    s.close()
+    break
 
   data, addr = s.recvfrom(buffSize)
