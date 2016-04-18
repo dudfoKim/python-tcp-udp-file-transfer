@@ -1,13 +1,13 @@
 import socket
 
-sckt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
 buffSize = 4096
+
+sckt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 host = socket.gethostname()
 port = 1026
 
-print(host)
+print("Host: " + host)
 
 sckt.bind(('', port))
 
@@ -15,20 +15,20 @@ sckt.listen(5)
 
 while True:
 
-    c, address = sckt.accept()
+    conn, address = sckt.accept()
 
     print("\nConnected with: " + str(address) + "\n")
 
-    file = open("file.mp4", "wb")
+    file = open("duck.jpg", "wb")
 
-    l = c.recv(buffSize)
+    data = conn.recv(buffSize)
 
-    while l:
-        file.write(l)
+    while data:
+        file.write(data)
         print("Received " + str(file.tell()) + " bytes...")
-        l = c.recv(buffSize)
+        data = conn.recv(buffSize)
 
     print("\nFile received!\n")
 
     file.close()
-    c.close()
+    conn.close()
