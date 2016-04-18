@@ -1,42 +1,41 @@
-#coding: utf-8
 import socket
 
 buffSize = 4096
 
-userinput = ""
+user_input = ""
 hosts = []
 port = 1026
 
 while True:
-  print("Type the address to send or 'ok' to begin the transmission:")
-  userinput = raw_input()
+    print("Type the address to send or 'ok' to begin the transmission:")
+    user_input = raw_input()
 
-  if userinput == "ok":
-    break
+    if user_input == "ok":
+        break
 
-  hosts.append(userinput)
+    hosts.append(user_input)
 
 fileName = "duck.jpg"
 
-for h in hosts:
+for host in hosts:
 
-  s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-  s.connect((h, port))
+    sckt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sckt.connect((host, port))
 
-  f = open(fileName, "rb")
+    file = open(fileName, "rb")
 
-  print "\nHost: " + h + "\n"
+    print("\nHost: " + host + "\n")
 
-  data = f.read(buffSize)
+    data = file.read(buffSize)
 
-  while (data):
-    s.send(data)
-    print "Sent " + str(f.tell()) + " bytes..."
-    data = f.read(buffSize)
+    while data:
+        sckt.send(data)
+        print("Sent " + str(file.tell()) + " bytes...")
+        data = file.read(buffSize)
 
-  print "\nSent to " + h + "\n"
+    print("\nSent to " + host + "\n")
 
-  s.shutdown(socket.SHUT_WR)
+    sckt.shutdown(socket.SHUT_WR)
 
-  s.close()
-  f.close()
+    sckt.close()
+    file.close()

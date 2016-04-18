@@ -2,33 +2,33 @@ import socket
 
 counter = 0
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sckt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 buffSize = 4096
 
 host = socket.gethostname()
 port = 1026
 
-addr = (host, port)
+address = (host, port)
 
 fileName = "file.mp4"
 
-f = open(fileName, "rb")
+file = open(fileName, "rb")
 
 while True:
 
-  print "Sending data..."
+    print("Sending data...")
 
-  data = f.read(buffSize)
+    data = file.read(buffSize)
 
-  if not data:
-    break
+    if not data:
+        break
 
-  s.sendto(data, addr)
+    sckt.sendto(data, address)
 
 
-if (s.sendto("done", addr)):
-  print "Sent!"
+if sckt.sendto("done", address):
+    print("Sent!")
 
-s.close()
-f.close()
+sckt.close()
+file.close()

@@ -1,29 +1,29 @@
 import socket
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sckt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 buffSize = 4096
 
 host = socket.gethostname()
 port = 1026
 
-s.bind(("", port))
+sckt.bind(("", port))
 
-addr = ("", port)
+address = ("", port)
 
-f = open("file.mp4", "wb")
+file = open("file.mp4", "wb")
 
-data, addr = s.recvfrom(buffSize)
+data, address = sckt.recvfrom(buffSize)
 
-while (data):
+while data:
 
-  f.write(data)
+    file.write(data)
 
-  print "Receiving data..."
+    print("Receiving data...")
 
-  if data == "done":
-    f.close()
-    s.close()
-    break
+    if data == "done":
+        file.close()
+        sckt.close()
+        break
 
-  data, addr = s.recvfrom(buffSize)
+    data, address = sckt.recvfrom(buffSize)
