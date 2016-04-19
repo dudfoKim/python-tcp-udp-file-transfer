@@ -2,6 +2,8 @@ import socket
 
 buffSize = 4096
 
+fileName = "duck.jpg"
+
 hosts = []
 port = 1026
 
@@ -14,7 +16,6 @@ while True:
 
     hosts.append(user_input)
 
-fileName = "duck.jpg"
 
 for host in hosts:
 
@@ -28,11 +29,12 @@ for host in hosts:
     data = file.read(buffSize)
 
     while data:
+
         sckt.send(data)
         print("Sent " + str(file.tell()) + " bytes...")
         data = file.read(buffSize)
 
-    print("\nSent to " + host + "\n")
+    print("\nFile sent to " + host + "\n")
 
     sckt.shutdown(socket.SHUT_WR)
 

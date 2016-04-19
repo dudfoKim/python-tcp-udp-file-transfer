@@ -9,7 +9,7 @@ port = 1026
 
 print("Host: " + host)
 
-sckt.bind(('', port))
+sckt.bind(("", port))
 
 sckt.listen(5)
 

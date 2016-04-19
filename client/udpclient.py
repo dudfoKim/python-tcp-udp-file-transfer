@@ -1,34 +1,31 @@
 import socket
 
-counter = 0
+buffSize = 4096
+
+fileName = "duck.jpg"
 
 sckt = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-buffSize = 4096
 
 host = socket.gethostname()
 port = 1026
 
 address = (host, port)
 
-fileName = "file.mp4"
-
 file = open(fileName, "rb")
 
-while True:
+print("\nHost: " + host + "\n")
 
-    print("Sending data...")
+data = file.read(buffSize)
 
-    data = file.read(buffSize)
-
-    if not data:
-        break
+while data:
 
     sckt.sendto(data, address)
+    print("Sent " + str(file.tell()) + " bytes...")
+    data = file.read(buffSize)
 
 
-if sckt.sendto("done", address):
-    print("Sent!")
+if sckt.sendto(b"done", address):
+    print("\nFile sent to " + host + "\n")
 
 sckt.close()
 file.close()
